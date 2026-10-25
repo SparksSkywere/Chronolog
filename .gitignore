@@ -1,0 +1,21 @@
+## Build
+**/bin/
+**/obj/
+**/publish/
+artifacts/
+dist/
+installer/*.exe
+build/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+*.log
+*.bak
+TestResults/
+
+## OS
+Thumbs.db
+Desktop.ini
+ehthumbs.db

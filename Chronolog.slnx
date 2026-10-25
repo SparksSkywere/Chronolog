@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Chronolog/Chronolog.csproj" />
+    <Project Path="src/Chronolog/Chronolog.Classic.csproj" />
+  </Folder>
+</Solution>

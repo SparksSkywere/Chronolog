@@ -1,0 +1,17 @@
+<Project>
+  <!--
+    Cloud/network project folders can break ACLs on bin/obj after cleans.
+    Keep intermediate outputs on the local machine under
+    %LOCALAPPDATA%\ChronologBuild. build-installer.ps1 copies the publish
+    payload to artifacts\ and the setup executables to dist\.
+  -->
+  <PropertyGroup>
+    <ChronologLocalRoot>$(LOCALAPPDATA)\ChronologBuild\</ChronologLocalRoot>
+    <!-- Per project: both csprojs live in one folder and must not share project.assets.json. -->
+    <BaseIntermediateOutputPath>$(ChronologLocalRoot)obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)$(Configuration)\$(TargetFramework)\</IntermediateOutputPath>
+    <OutputPath>$(ChronologLocalRoot)out\$(Configuration)\$(MSBuildProjectName)\$(TargetFramework)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+  </PropertyGroup>
+</Project>

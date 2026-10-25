@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!-- Chronolog Modern — Windows 10 / 11 -->
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <UseWPF>true</UseWPF>
+
+    <ApplicationTitle>Chronolog Modern</ApplicationTitle>
+    <Product>Chronolog Modern</Product>
+    <AssemblyTitle>Chronolog Modern</AssemblyTitle>
+    <Description>Personal journal by Skywere Industries (Windows 10/11)</Description>
+    <Company>Skywere Industries</Company>
+    <Authors>Skywere Industries</Authors>
+    <Copyright>© Skywere Industries</Copyright>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <InformationalVersion>1.0.0</InformationalVersion>
+    <DefineConstants>$(DefineConstants);CHRONOLOG_MODERN</DefineConstants>
+
+    <ApplicationIcon>Assets\chronolog.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <Optimize>true</Optimize>
+    <DebuggerSupport>false</DebuggerSupport>
+    <Deterministic>true</Deterministic>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\chronolog.ico" />
+    <Resource Include="Assets\chronolog.png" />
+    <Resource Include="Assets\chronolog-large.png" />
+    <None Include="Assets\chronolog.ico" />
+  </ItemGroup>
+
+  <!-- Before every build, pull the production icon from repo assets\installer.ico -->
+  <Target Name="SyncProductionIcon" BeforeTargets="PrepareForBuild;BeforeBuild;BeforePublish;ResolveWin32Resources">
+    <PropertyGroup>
+      <_InstallerIco>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\assets\installer.ico'))</_InstallerIco>
+      <_AppIco>$(MSBuildProjectDirectory)\Assets\chronolog.ico</_AppIco>
+    </PropertyGroup>
+    <Copy SourceFiles="$(_InstallerIco)" DestinationFiles="$(_AppIco)" SkipUnchangedFiles="false"
+          Condition="Exists('$(_InstallerIco)')" />
+    <Message Importance="high" Text="Synced app icon from assets\installer.ico" Condition="Exists('$(_InstallerIco)')" />
+  </Target>
+
+</Project>
